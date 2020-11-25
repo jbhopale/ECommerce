@@ -1,0 +1,19 @@
+.card .card-text{
+  color:#7f7f7f;
+}
+.price{
+  font-size: 16px;
+  font-weight: bold;
+}
+.image-dim{
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:5%;
+}
+.row{
+  margin-top: 20px;
+  margin-bottom: auto;
+}
