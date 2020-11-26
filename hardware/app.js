@@ -8,9 +8,14 @@ var indexRouter = require('./routes/index');
 var mongoose = require('mongoose');
 var app = express();
 var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
+const { appendFileSync } = require('fs');
 
 //Access the databse
 mongoose.connect('mongodb://localhost:27017/hardwareshopping', { useUnifiedTopology: true,useNewUrlParser: true });
+
+require('./config/passport');
 
 // view engine setup
 app.engine('.hbs',expressHbs({defaultLayout:'layout', extname :'.hbs'}));
@@ -22,6 +27,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(session({secret:'mysupersecret', resave: false, saveUninitialized: false}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
