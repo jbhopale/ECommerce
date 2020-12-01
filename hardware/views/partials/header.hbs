@@ -32,8 +32,14 @@
           Accounts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">My Profile</a>
-          <a class="dropdown-item" href="#">Order History</a>
+          {{#if login}}
+          <a class="dropdown-item" href="/user/profile">My Profile</a>
+          <a class="dropdown-item" href="/user/orderHistory">Order History</a>
+          <a class="dropdown-item" href="/user/logout">Logout</a>
+          {{else}}
+          <a class="dropdown-item" href="/user/login">Login</a>
+          <a class="dropdown-item" href="/user/signup">Sign-up</a>
+          {{/if}}
         </div>
         </li>
       </ul>
