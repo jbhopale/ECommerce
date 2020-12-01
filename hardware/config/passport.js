@@ -12,6 +12,7 @@ passport.deserializeUser(function(id, done){
     });
 });
 
+//Sign up new user into the system
 passport.use('local.signup', new localStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -34,4 +35,24 @@ passport.use('local.signup', new localStrategy({
             return done(null, newUser);
         });
     });
+}));
+
+//Login process for existing user
+passport.use('local.login', new localStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+}, function(req, email, password, done){
+    User.findOne({'email':email}, function(err, user){
+        if(err){
+            return done(err);
+        }
+        if(!user){
+            return done(null, false, {message : 'No user account found with this email.'});
+        }
+        if(!user.validPassword(password)){
+            return done(null, false, {message : 'Invalid password.'});
+        }
+        return done(null, user);
+    }); 
 }));
