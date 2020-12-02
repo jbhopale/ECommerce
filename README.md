@@ -15,4 +15,5 @@ npm install express-generator
 npm install --save bcrypt
 npm i -D handlebars@4.5.0
 npm install passport
+npm install --save connect-mongo // for creating store cart using express session
 ```
