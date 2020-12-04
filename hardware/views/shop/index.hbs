@@ -8,7 +8,9 @@
                         <h5 class="card-title">{{#each this }}{{ this.productName }}{{/each}}</h5>
                         <p class="card-text">{{#each this }}{{ this.productDescription }}{{/each}}</p>
                         <div><div class = "price float-left">$ {{#each this }}{{ this.productPrice }}{{/each}}</div>
-                        <a href="/addToCart/{{#each this }}{{ this._id }}{{/each}}" class="btn btn-primary float-right" role="button">Add to cart</a>
+                        <a href="/addToCart/{{#each this }}{{ this._id }}{{/each}}" class="btn btn-primary float-right" role="button">
+                        Add to cart
+                        </a>
                         </div>
                     </div>
                 </div>
@@ -16,3 +18,18 @@
     {{/each}}
     </div>
 {{/each}}
+
+</br></br></br>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
