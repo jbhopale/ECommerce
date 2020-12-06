@@ -79,6 +79,5 @@ input[type=submit] {
 .center {
   margin: auto;
   width: 60%;
-  border: 0.5px  grey;
   padding: 10px;
 }

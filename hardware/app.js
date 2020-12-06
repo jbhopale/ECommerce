@@ -6,12 +6,15 @@ var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
+var adminRouter = require('./routes/admin');
+var productRouter = require('./routes/product');
 var mongoose = require('mongoose');
 var app = express();
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 var MongoStore = require('connect-mongo')(session);
+var Handlebars = require('handlebars');
 const { appendFileSync } = require('fs');
 
 //Access the databse
@@ -43,9 +46,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
+  console.log(res.locals.isAdmin);
   next();
 });
 app.use('/user', userRouter);
+app.use('/admin', adminRouter);
+app.use('/product', productRouter);
 app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,6 +67,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
 module.exports = app;

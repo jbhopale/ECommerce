@@ -8,15 +8,17 @@
                 <img src="{{this.item.productImagePath}}" width="20%" height="15%">
                 <span class = "badge">{{this.quantity}}</span>
                 <strong> {{this.item.productName}} </strong>
-                <span class="label label-success"> $ {{this.item.productPrice}} </span>
-                <div class="btn-gropu">
-                    <button class = "btn-primary btn-xn dropdown-toggle" type = "button">Action <span class="caret"></span> </button>
-                    <ul class = "dropdown-menu">
-                        <li><a href="#"> Delete 1 item </a></li>
-                        <li><a href="#"> Delete all items </a></li>
-                    </ul>
+                <div>
+                    <span class="label label-success"> <strong> Item Price: $ {{this.item.productPrice}}</strong></span>
+                
                 </div>
-                 <hr>
+                
+                <div>
+                    <br>
+                <a href="/reduce/{{#each this }}{{ this._id }}{{/each}}" class = "btn-danger btn" type="button">Delete by 1</a>
+                
+                </div>
+                <hr>
                 {{/each}}
             </li>
             

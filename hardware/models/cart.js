@@ -16,11 +16,31 @@ module.exports = function Cart(initialItems){
         existingItems.price = existingItems.item.productPrice * existingItems.quantity;
         this.totalQuantity++;
         this.totalPrice += existingItems.item.productPrice;
-    }
+    };
+
+    this.reduceByOne = function(id){
+        var existingItems = this.items[id];
+
+        existingItems.quantity--;
+        existingItems.price = existingItems.item.productPrice * existingItems.quantity;
+        this.totalQuantity--;
+        this.totalPrice -= existingItems.item.productPrice;
+
+    };
+
+    this.updateCart = function(id){
+        var existingItems = this.items[id];
+
+        existingItems.quantity--;
+        existingItems.price = existingItems.item.productPrice * existingItems.quantity;
+        this.totalQuantity--;
+        this.totalPrice -= existingItems.item.productPrice;
+    };
 
     this.createProductArray = function(){
         var productArray = [];
         for(var id in this.items){
+            if(this.items[id].quantity != 0)
             productArray.push(this.items[id]);
         }
         return productArray;

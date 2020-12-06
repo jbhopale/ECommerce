@@ -11,11 +11,20 @@
       </li>
 
       <li>
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form action = "/product/search" method = "POST">
+        <input class="form-control mr-sm-2" type="search" name ="search" placeholder="Search" aria-label="Search" style="width: 100%;">
+        <input type ="hidden" name ="_csrf" value="{{ csrfToken }}">
+        <select class="dropbar" id="inputSelect" name="searchBy">
+                                                  <option selected> </option>
+                                                  <option value="Laptop">Laptop</option>
+                                                  <option value="Monitor">Monitor</option>
+                                                  <option value="Mobile">Mobile</option>
+                                                  <option value="Keyboard">Keyboard</option>
+       </select>
         
-      </li>
-      <li>
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -33,16 +42,25 @@
           <i class="fas fa-user"></i>
           Accounts
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: auto;">
           {{#if login}}
-          <a class="dropdown-item" href="/user/profile">My Profile</a>
-          <a class="dropdown-item" href="/user/orderHistory">Order History</a>
-          <a class="dropdown-item" href="/user/logout">Logout</a>
+                <a class="dropdown-item" href="/admin/addProduct">Add Products</a>
+                <a class="dropdown-item" href="/user/showProducts">Show Products</a>
+                <a class="dropdown-item" href="/admin/deleteProduct">Delete Products</a>
+                <a class="dropdown-item" href="/admin/logout">Logout</a>
+                <a class="dropdown-item" href="/user/orderHistory">Order History</a>
+          <hr>
+          <label>Singed in as </label>
+          <label><i>{{#each session.req.user }}{{ this.email }}{{/each}}</i></label>
           {{else}}
           <a class="dropdown-item" href="/user/login">Login</a>
           <a class="dropdown-item" href="/user/signup">Sign-up</a>
           {{/if}}
+          
         </div>
+        </li>
+        <li>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
         </li>
       </ul>
     </form>

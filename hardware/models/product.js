@@ -17,7 +17,18 @@ var schema = new Schema({
     productPrice :{
         type: Number,
         required:true
-    }
+    },
+    productQuantity :{
+        type: Number,
+        required: true
+    },
+    productCategory :{
+        type: String,
+        required: true
+    },
+    isSoftDeleted:{
+        type: Boolean
+    }      
 });
 
 module.exports = mongoose.model('Product', schema);
