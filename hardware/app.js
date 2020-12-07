@@ -10,6 +10,7 @@ var adminRouter = require('./routes/admin');
 var productRouter = require('./routes/product');
 var mongoose = require('mongoose');
 var app = express();
+var user = require('./models/user');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -23,7 +24,12 @@ mongoose.connect('mongodb://localhost:27017/hardwareshopping', { useUnifiedTopol
 require('./config/passport');
 
 // view engine setup
-app.engine('.hbs',expressHbs({defaultLayout:'layout', extname :'.hbs'}));
+app.engine('.hbs',expressHbs({defaultLayout:'layout', extname :'.hbs', helpers: {
+  paginator: require('express-paginatorjs')
+}}));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -46,7 +52,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
-  console.log(res.locals.isAdmin);
+  if(req.isAuthenticated())
+  res.locals.admin = req.session.passport.user === "5fcd8f166d5b649a76a29ac3";
   next();
 });
 app.use('/user', userRouter);
@@ -72,5 +79,6 @@ app.use(function(err, req, res, next) {
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+
 
 module.exports = app;

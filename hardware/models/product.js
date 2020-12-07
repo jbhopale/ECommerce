@@ -26,7 +26,7 @@ var schema = new Schema({
         type: String,
         required: true
     },
-    isSoftDeleted:{
+    isNotSoftDeleted:{
         type: Boolean
     }      
 });

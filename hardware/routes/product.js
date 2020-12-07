@@ -6,18 +6,12 @@ var csrf = require('csurf');
 var passport = require('passport');
 var Cart = require('../models/cart');
 
-
-
 var monk = require('monk');
 var db = monk('localhost:27017/hardwareshopping');
 
-router.get('/search', function(req, res){
-    console.log("inside search get");
-  });
-  
-  router.post('/search', function(req, res) {
+router.post('/search', function(req, res) {
     var productChunk = [];
-                
+    var successMsg = req.flash('success')[0];;            
     // title: { $regex: name, $options: "i" }
     var filter_genre = req.body.searchBy;
     var name = req.body.search;
@@ -35,7 +29,7 @@ router.get('/search', function(req, res){
             for(var i = 0 ; i < productsArray.length ; i += chunkSize){
               productChunk.push(productsArray.slice(i, i + chunkSize));
             }
-        res.render('shop/index', { title: 'Hardware Shop', products: productChunk });
+        res.render('shop/index', { title: 'Hardware Shop', products: productChunk, successMsg: successMsg, noMessage: !successMsg });
       }
     });
   }

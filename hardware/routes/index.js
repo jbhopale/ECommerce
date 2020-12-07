@@ -4,6 +4,7 @@ var Product = require('../models/product');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
 var Handlebars = require('handlebars');
+const cart = require('../models/cart');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,9 +20,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/addToCart/:id', function(req, res, next){ 
-  var productId = req.params.id;
+  
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-  productId = (productId.substring(productId.length/2));
+  var productId = req.params.id;
   Product.findById(productId, function(err, product){
     if(err){
       return res.redirect('/');
@@ -43,6 +44,14 @@ router.get('/reduce/:id', function(req, res, next){
   req.session.cart = cart;
   res.redirect('/cartview')
 });
+router.get('/add/:id', function(req, res, next){
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  cart.addByOne(productId);
+  req.session.cart = cart;
+  res.redirect('/cartview')
+});
 
 router.get('/cartview', function(req, res, next){
   if(!req.session.cart){
@@ -57,6 +66,7 @@ router.get('/checkoutcart', isLoggedIn, function(req, res, next){
     return res.redirect('/cartview');
   }
   var cart = new Cart(req.session.cart);
+  
   res.render('shop/checkoutcart', {totalPrice: cart.totalPrice});
 
 });
@@ -65,6 +75,7 @@ router.post('/checkoutcart', isLoggedIn, function(req, res, next){
   if(!req.session.cart){
     return res.redirect('/cartview');
   }
+
   var order = new Order({
     user: req.user,
     cart: new Cart(req.session.cart),

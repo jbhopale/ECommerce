@@ -5,7 +5,7 @@ var Order = require('../models/order');
 var csrf = require('csurf');
 var passport = require('passport');
 var Cart = require('../models/cart');
-
+var formidable = require('formidable');
 
 router.get('/addProduct', function(req, res, next){
   console.log("addp product get");
@@ -14,19 +14,73 @@ router.get('/addProduct', function(req, res, next){
 });
 
 router.post('/addProduct',isLoggedIn, function(req, res, next){
-  console.log("add product post");
- 
     var product = new Product();
     
     product.productImagePath=req.body.img;
+    console.log(req.body.img.path);
     product.productName=req.body.name;
     product.productDescription= req.body.description;
     product.productPrice= req.body.price;
     product.productQuantity = req.body.quantity;
     product.productCategory = req.body.category;
+    product.isNotSoftDeleted = true;
     product.save();
+    
+    res.render('admin/addProduct');
+});
 
-      res.render('admin/addProduct');
+router.get('/deleteProducts', function(req, res, next){
+  var messages = req.flash('error');
+  Product.find(function(err,docs){
+    var productChunk = [];
+    for(var i = 0 ; i < docs.length ; i++){
+       productChunk.push(docs[i]);
+    }
+    
+    res.render('admin/deleteProducts', { title: 'Hardware Shop', products: productChunk });
+  });
+});
+
+
+router.get('/showProducts', function(req, res, next){
+  var messages = req.flash('error');
+  Product.find(function(err,docs){
+    var productChunk = [];
+    for(var i = 0 ; i < docs.length ; i++){
+       productChunk.push(docs[i]);
+    }
+    
+    res.render('admin/showProducts', { title: 'Hardware Shop', products: productChunk });
+  });
+});
+
+router.get('/delete/:id', function(req, res, next){
+ var productId = req.params.id;
+  console.log('inside delete ger')
+  Product.findOne({'_id':productId}, function(err, product){
+        
+    if(err){
+        throw (err);
+    }
+
+    if(product){
+      console.log("Product Found", product);
+      product.isNotSoftDeleted = false;
+      product.save();
+    }
+    Product.find(function(err,docs){
+      var productChunk = [];
+      for(var i = 0 ; i < docs.length ; i++){
+        if(docs[i].isNotSoftDeleted)
+        {
+          productChunk.push(docs[i]);
+        }
+      }
+      console.log(productChunk);
+      res.redirect('/');
+    });
+  }); 
+
 });
 
 router.get('/logout', function(req, res) {

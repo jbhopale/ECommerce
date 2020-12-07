@@ -28,6 +28,16 @@ module.exports = function Cart(initialItems){
 
     };
 
+    this.addByOne = function(id){
+        var existingItems = this.items[id];
+
+        existingItems.quantity++;
+        existingItems.price = existingItems.item.productPrice * existingItems.quantity;
+        this.totalQuantity++;
+        this.totalPrice += existingItems.item.productPrice;
+
+    };
+
     this.updateCart = function(id){
         var existingItems = this.items[id];
 

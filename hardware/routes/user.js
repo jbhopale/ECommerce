@@ -36,7 +36,6 @@ router.get('/login', function(req, res, next){
 });
 
 router.post('/login', passport.authenticate('local.login',{
-  
   failureRedirect:'/user/login',
   failureFlash: true
 }), function(req, res, next){
@@ -44,15 +43,8 @@ router.post('/login', passport.authenticate('local.login',{
     var oldUrl = req.session.oldUrl;
     req.session.oldUrl = null;
     res.redirect(oldUrl);
-  }else{
-    var reqMail = req.session.email;
-    var adminMail = "jayant.bhopale@gmail.com";
-
-    console.log("req mail", reqMail);
-    console.log("admin mail", adminMail);
-
-    console.log(reqMail === adminMail)
-
+  }
+  else{
     res.redirect('/');
   }
 });
