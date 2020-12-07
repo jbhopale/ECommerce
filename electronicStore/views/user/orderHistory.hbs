@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>My order History</h1>
+        {{#each orders}}
+ 
+        
+        <div class="card border-primary mb-3">
+         <div class="card-header ">
+            <strong>
+                Order ID:
+                {{#each this }}{{ this._id }}{{/each}}
+            </strong>  
+        </div>
+            
+            <ul class="list-group list-group-flush">
+                {{#each this.items}}
+                
+                <li class="list-group-item">
+                    <span><img src="{{this.item.productImagePath}}" width="20%" height="15%"></span>
+                    
+                    {{this.item.productName}} | 
+                    <span class = "badge badge-pill badge-secondary">{{this.quantity}}</span>
+                    <span><strong> |   $ {{this.item.productPrice}}</strong>
+                </li>
+                {{/each}}
+            </ul>
+        <div class="card-footer">
+            <strong>
+                
+                Total Price: $ {{#each this }}{{ this.cart.totalPrice }}{{/each}}
+                </br>
+                Delivered At: {{#each this }}{{ this.address }}{{/each}}
+            </strong>  
+        </div>
+</div>
+
+         
+{{/each}}
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="row">
+</div>
+
+  <h1> Admin Panel | Delete Products</h1>
+    <hr>
+<table>
+{{#each products}}
+    
+          {{#each this}}
+            
+            {{#if isNotSoftDeleted}}
+            <tr>
+              <td>
+                
+                <img src="{{ this.productImagePath }}" class="card-img-top img-responsive image-dim" alt="Image not available">
+                   <h5 class="card-title">{{ this.productName }} </h5> 
+              </td>
+              
+              
+              <td>
+                <div><div class = "price float-left">&emsp;&emsp;&emsp;&emsp;&emsp;$ {{ this.productPrice }} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
+              </td>
+              
+              
+              <td>
+                <a href="/admin/delete/{{ this._id }}" class="btn btn-danger float-center" role="button">
+                        Delete item from inventory &emsp;&emsp;&emsp;&emsp;&emsp;
+                </a>
+              </td>
+              
+              
+              <td>
+                <div class="card-header">
+                        Available quantities: {{ this.productQuantity }}
+                      </div>
+              </td>
+                       
+            </tr>
+            <tr>
+                    <td>
+                
+                _______________________
+              </td>
+              
+              
+              <td>
+                
+                __________________________
+              </td>
+              
+              
+              <td>
+                
+                ______________________________________
+              </td>
+              
+              
+              <td>
+              
+                _____________________________
+              </td>
+            </tr>
+            {{/if}}
+            <!--
+            <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ this.productImagePath }}" class="card-img-top img-responsive image-dim" alt="Image not available">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ this.productName }} </h5>
+                        <p class="card-text">{{ this.productDescription }}</p>
+                        <div><div class = "price float-left">$ {{ this.productPrice }} </div>
+
+                        <br>
+                        <br>
+                        <a href="/admin/delete/{{ this._id }}" class="btn btn-danger float-center" role="button">
+                        Delete item from inventory
+                        </a></div>
+                    </div>
+                      <div class="card-header">
+                        Available quantities: {{ this.productQuantity }}
+                      </div>
+                </div>
+            </div>
+-->
+            
+           <!--
+           <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{#each this }}{{ this.productImagePath }}{{/each}}" class="card-img-top img-responsive image-dim" alt="Image not available">
+                    <div class="card-body">
+                        <h5 class="card-title">{{#each this }}{{ this.productName }} {{/each}}</h5>
+                        <p class="card-text">{{#each this }}{{ this.productDescription }}{{/each}}</p>
+                        <div><div class = "price float-left">$ {{#each this }}{{ this.productPrice }}{{/each}} </div>
+
+                        <br>
+                        <br>
+                        <a href="/admin/delete/{{#each this }}{{ this._id }}{{/each}}" class="btn btn-danger float-center" role="button">
+                        Delete item from inventory
+                        </a></div>
+                    </div>
+                      <div class="card-header">
+                        Available quantities: {{#each this }}{{ this.productQuantity }}{{/each}}
+                      </div>
+                </div>
+            </div>
+
+            -->
+    {{/each}}
+{{/each}}
+
+</br></br></br>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="/" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
