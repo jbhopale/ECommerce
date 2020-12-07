@@ -1,0 +1,88 @@
+
+<div class="row">
+<div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offfset-3">
+    <div id="success" class = "alert-success alert" {{#if noMessage}}hidden{{/if}}>
+        {{ successMsg }}
+    </div>
+</div>
+
+</div>
+{{#if admin}}
+  <h1> Admin Panel</h1>
+  <hr>
+  <div class="row">
+  <div class="col-xs-6 col-sm-6"><a href="/admin/addProduct" class="btn btn-primary btn-lg btn-block float-center" role="button"> Add Products </a></div>
+  
+  <div class="col-xs-6 col-sm-6"><a href="/admin/showProducts" class="btn btn-info btn-lg btn-block float-center" role="button"> Show Products </a></div>
+  </div>
+  <div class="row">
+  <div class="col-xs-6 col-sm-6"><a href="/admin/updateProducts" class="btn btn-warning btn-lg btn-block float-center" role="button"> Update Products </a></div>
+  <div class="col-xs-6 col-sm-6"><a href="/admin/deleteProducts" class="btn btn-danger btn-lg btn-block float-center" role="button"> Delete Products </a></div>
+  <hr>
+  <br><br><br><br>
+  </div>
+  <div class="clearfix visible-xs-block center">
+    <strong>
+    Total Products available in the inventory: {{products.length}}
+    </strong>
+  </div>
+  
+
+{{else}}
+{{#each products}}
+    <div class="row">
+
+    {{#each this}}
+
+
+
+
+
+
+
+
+    {{#each this }}
+    {{#if this.isNotSoftDeleted }}
+         <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ this.productImagePath }}" class="card-img-top img-responsive image-dim" alt="Image not available">
+                  <div class="card-body">
+                        <h5 class="card-title">{{ this.productName }}</h5>
+                        <div><div class = "price float-left">$ {{ this.productPrice }}</div>
+
+                        <a href="/addToCart/{{ this._id }}" class="btn btn-primary float-right" role="button">
+                        Add to cart
+                        </a>
+                        
+                        </div>
+                    </div>
+                      <div class="card-header">
+                        Available quantities:{{ this.productQuantity }}
+                      </div>
+               </div>
+         </div>
+                    
+    {{/if}}
+    {{/each}}
+ {{/each}}
+    </div>
+   
+{{/each}}
+
+</br></br></br>
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="/" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li class="page-item"><a class="page-link" href="/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+{{/if}}
