@@ -29,7 +29,7 @@ router.post('/search', function(req, res) {
             for(var i = 0 ; i < productsArray.length ; i += chunkSize){
               productChunk.push(productsArray.slice(i, i + chunkSize));
             }
-        res.render('shop/index', { title: 'Hardware Shop', products: productChunk, successMsg: successMsg, noMessage: !successMsg });
+        res.render('shop/index', { title: 'Electronics Store', products: productChunk, successMsg: successMsg, noMessage: !successMsg });
       }
     });
   }
@@ -42,7 +42,7 @@ router.post('/search', function(req, res) {
             for(var i = 0 ; i < productsArray.length ; i += chunkSize){
               productChunk.push(productsArray.slice(i, i + chunkSize));
             }
-        res.render('shop/index', { title: 'Hardware Shop', products: productChunk });
+        res.render('shop/index', { title: 'Electronics Store', products: productChunk });
       }
     });
   }
@@ -55,7 +55,7 @@ router.post('/search', function(req, res) {
                 for(var i = 0 ; i < productsArray.length ; i += chunkSize){
                   productChunk.push(productsArray.slice(i, i + chunkSize));
                 }
-            res.render('shop/index', { title: 'Hardware Shop', products: productChunk });
+            res.render('shop/index', { title: 'Electronics Store', products: productChunk });
         }
     });
   }
@@ -69,7 +69,7 @@ router.post('/search', function(req, res) {
             for(var i = 0 ; i < productsArray.length ; i += chunkSize){
               productChunk.push(productsArray.slice(i, i + chunkSize));
             }
-        res.render('shop/index', { title: 'Hardware Shop', products: productChunk });
+        res.render('shop/index', { title: 'Electronics Store', products: productChunk });
       }
     });
   }

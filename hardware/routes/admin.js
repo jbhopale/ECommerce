@@ -21,12 +21,13 @@ router.post('/addProduct',isLoggedIn, function(req, res, next){
     product.productName=req.body.name;
     product.productDescription= req.body.description;
     product.productPrice= req.body.price;
+    console.log(req.body.price);
     product.productQuantity = req.body.quantity;
     product.productCategory = req.body.category;
     product.isNotSoftDeleted = true;
     product.save();
     
-    res.render('admin/addProduct');
+    res.redirect('/');
 });
 
 router.get('/deleteProducts', function(req, res, next){
@@ -37,7 +38,7 @@ router.get('/deleteProducts', function(req, res, next){
        productChunk.push(docs[i]);
     }
     
-    res.render('admin/deleteProducts', { title: 'Hardware Shop', products: productChunk });
+    res.render('admin/deleteProducts', { title: 'Electronics Store', products: productChunk });
   });
 });
 
@@ -50,9 +51,39 @@ router.get('/showProducts', function(req, res, next){
        productChunk.push(docs[i]);
     }
     
-    res.render('admin/showProducts', { title: 'Hardware Shop', products: productChunk });
+    res.render('admin/showProducts', { title: 'Electronics Store', products: productChunk });
   });
 });
+
+router.get('/updateProducts', function(req, res, next){
+  var messages = req.flash('error');
+  Product.find(function(err,docs){
+    var productChunk = [];
+    for(var i = 0 ; i < docs.length ; i++){
+       productChunk.push(docs[i]);
+    }
+    
+    res.render('admin/updateProducts', { title: 'Electronics Store', products: productChunk });
+  });
+});
+
+router.get('/update/:id', function(req, res, next){
+  var productId = req.params.id;
+   Product.findOne({'_id':productId}, function(err, product){
+         
+     if(err){
+         throw (err);
+     }
+ 
+     if(product){
+       console.log(product);
+       res.render('admin/updateProduct', { title: 'Electronics Store', product: product });
+     }
+   }); 
+ 
+ });
+
+ 
 
 router.get('/delete/:id', function(req, res, next){
  var productId = req.params.id;

@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     for(var i = 0 ; i < docs.length ; i += chunkSize){
       productChunk.push(docs.slice(i, i + chunkSize));
     }
-    res.render('shop/index', { title: 'Hardware Shop', products: productChunk, successMsg: successMsg, noMessage: !successMsg });
+    res.render('shop/index', { title: 'Electronics Store', products: productChunk, successMsg: successMsg, noMessage: !successMsg });
   });
 });
 
@@ -27,7 +27,6 @@ router.get('/addToCart/:id', function(req, res, next){
     if(err){
       return res.redirect('/');
     }
-    console.log(product.productPrice);
     cart.add(product, product.id);
     req.session.cart = cart;
     

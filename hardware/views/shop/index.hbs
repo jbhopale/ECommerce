@@ -11,17 +11,22 @@
   <h1> Admin Panel</h1>
   <hr>
   <div class="row">
-  <div class="col-xs-6 col-sm-4"><a href="/admin/addProduct" class="btn btn-primary btn-lg btn-block float-right" role="button"> Add Products </a></div>
-  <div class="col-xs-6 col-sm-4"><a href="/admin/showProducts" class="btn btn-info btn-lg btn-block float-right" role="button"> Show Products </a></div>
-  <div class="col-xs-6 col-sm-4"><a href="/admin/deleteProducts" class="btn btn-danger btn-lg btn-block float-right" role="button"> Delete Products </a></div>
+  <div class="col-xs-6 col-sm-6"><a href="/admin/addProduct" class="btn btn-primary btn-lg btn-block float-center" role="button"> Add Products </a></div>
+  
+  <div class="col-xs-6 col-sm-6"><a href="/admin/showProducts" class="btn btn-info btn-lg btn-block float-center" role="button"> Show Products </a></div>
+  </div>
+  <div class="row">
+  <div class="col-xs-6 col-sm-6"><a href="/admin/updateProducts" class="btn btn-warning btn-lg btn-block float-center" role="button"> Update Products </a></div>
+  <div class="col-xs-6 col-sm-6"><a href="/admin/deleteProducts" class="btn btn-danger btn-lg btn-block float-center" role="button"> Delete Products </a></div>
   <hr>
   <br><br><br><br>
+  </div>
   <div class="clearfix visible-xs-block center">
     <strong>
     Total Products available in the inventory: {{products.length}}
     </strong>
   </div>
-  </div>
+  
 
 {{else}}
 {{#each products}}
@@ -73,8 +78,8 @@
       <a class="page-link" href="/" tabindex="-1">Previous</a>
     </li>
     <li class="page-item"><a class="page-link" href="/">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/">3</a></li>
     <li class="page-item">
       <a class="page-link" href="#">Next</a>
     </li>
