@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <a class="navbar-brand" href="/">Electronics store</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+      <li>
+        <form class="form-inline" action = "/product/search" method = "POST">
+        <div >
+          <input class="form-control mr-sm-2" type="search" name ="search" placeholder="Search" aria-label="Search">
+        
+        </div>
+        
+        <label for="searchBy"> &emsp; Category: </label>
+        <select class="dropbar" id="inputSelect" name="searchBy">
+                                                  <option selected> </option>
+                                                  <option value="Laptop">Laptop</option>
+                                                  <option value="Monitor">Monitor</option>
+                                                  <option value="Mobile">Mobile</option>
+                                                  <option value="Keyboard">Keyboard</option>
+       </select>
+        
+        <input type ="hidden" name ="_csrf" value="{{ csrfToken }}">
+        &emsp;
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">  Search</button>
+        </form>
+
+        
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        {{#unless admin}}
+        <li class="nav-item">
+            <a class="nav-link" href="/cartview/"><i class="fas fa-shopping-cart"></i> Cart
+            <span clss="badge">{{session.cart.totalQuantity}}</span>
+            </a>
+        </li>
+        {{/unless}}
+        <li>
+            &emsp;
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fas fa-user"></i>
+          Accounts
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: auto;">
+          {{#if login}}
+              {{#if admin}}
+                <a class="dropdown-item" href="/admin/addProduct">Add Products</a>
+                <a class="dropdown-item" href="/admin/deleteProducts">Delete Products</a>
+                <a class="dropdown-item" href="/admin/logout">Logout</a>
+              
+              {{else}}
+                  <a class="dropdown-item" href="/user/orderHistory">Order History</a>
+                  <a class="dropdown-item" href="/user/logout">Logout</a>
+
+              {{/if}}
+             
+          <hr>
+          <label>Singed in as </label>
+          <label><i>{{#each session.req.user }}{{ this.email }} {{/each}}</i></label>
+            
+            
+            {{else}}       
+          <a class="dropdown-item" href="/user/login">Login</a>
+          <a class="dropdown-item" href="/user/signup">Sign-up</a>
+          {{/if}}
+          
+        </div>
+        </li>
+        <li>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        </li>
+      </ul>
+    </form>
+  </div>
+</nav>
